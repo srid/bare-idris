@@ -16,6 +16,10 @@
       ];
       perSystem = { pkgs, lib, config, ... }:
         let
+          # mkIdris2Prefix : [IdrisPackageSource] -> Derivation
+          #
+          # Create a derivation that represents the $IDRIS2_PREFIX containing
+          # the given package sources.
           mkIdris2Prefix = packageSources:
             pkgs.runCommand "idris2-prefix"
               {
@@ -33,8 +37,9 @@
               }
               rm -rf $out/tmp
             '';
+          # TODO: Best to parse this out of bare-idris.ipkg?
           idrisPrefix = mkIdris2Prefix [
-            inputs.idris-indexed.outPath
+            inputs.idris-indexed
           ];
         in
         {
