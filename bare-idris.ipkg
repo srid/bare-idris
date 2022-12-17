@@ -1,0 +1,7 @@
+package bare-idris
+
+version = 0.1.0
+depends = contrib
+modules = Main
+main = Main
+executable = bare-idris

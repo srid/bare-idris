@@ -12,22 +12,29 @@
       ];
       perSystem = { pkgs, lib, config, ... }: {
         mission-control.scripts = {
-          hello = {
-            description = "Say Hello";
-            command = "echo Hello";
-          };
           fmt = {
             description = "Format the top-level Nix files";
             command = "${lib.getExe pkgs.nixpkgs-fmt} ./*.nix";
             category = "Tools";
           };
-          ponysay = {
-            package = pkgs.ponysay;
+          run = {
+            description = "Compile and run the project";
+            command = ''
+              set -x
+              ${lib.getExe pkgs.idris2} --build ./*.ipkg 
+              build/exec/bare-idris
+            '';
           };
         };
         devShells.default =
-          let shell = pkgs.mkShell { };
-          in config.mission-control.installToDevShell shell;
+          let
+            shell = pkgs.mkShell {
+              nativeBuildInputs = [
+                pkgs.idris2
+              ];
+            };
+          in
+          config.mission-control.installToDevShell shell;
       };
     };
 }
