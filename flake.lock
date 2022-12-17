@@ -33,6 +33,22 @@
         "type": "github"
       }
     },
+    "idris-indexed": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1659316146,
+        "narHash": "sha256-xySH74mX3i0Xi7EjXpfr/IUWl8kyB5svV34FVuK3uEk=",
+        "owner": "mattpolzin",
+        "repo": "idris-indexed",
+        "rev": "eb1a019dddcf90412fa8ada1e14574b37a3539c3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "mattpolzin",
+        "repo": "idris-indexed",
+        "type": "github"
+      }
+    },
     "mission-control": {
       "inputs": {
         "flake-root": "flake-root",
@@ -105,6 +121,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "idris-indexed": "idris-indexed",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs_2"
       }

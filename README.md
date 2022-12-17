@@ -7,3 +7,8 @@ Once in nix shell, run:
 ```sh
 , watch
 ```
+
+## Dependencies
+
+- Core dependencies, like `contrib`, can be added to the `.ipkg` file.
+- Custom dependencies can be added as a flake input, with some massing of `IDRIS2_PREFIX` in flake.nix. This is WIP.
