@@ -25,6 +25,13 @@
               build/exec/bare-idris
             '';
           };
+          watch = {
+            description = "Watch the project and re-run on changes";
+            command = ''
+              set -x
+              echo *.idr | ${lib.getExe pkgs.entr} , run
+            '';
+          };
         };
         devShells.default =
           let
