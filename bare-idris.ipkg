@@ -2,7 +2,7 @@ package bare-idris
 
 version = 0.1.0
 depends = contrib
-        , indexed
+        , collie
 modules = Main
 main = Main
 executable = bare-idris

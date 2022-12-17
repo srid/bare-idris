@@ -5,8 +5,8 @@
     mission-control.url = "github:Platonic-Systems/mission-control";
 
     # Idris dependencies
-    idris-indexed.url = "github:mattpolzin/idris-indexed";
-    idris-indexed.flake = false;
+    collie.url = "github:ohad/collie";
+    collie.flake = false;
   };
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -21,25 +21,30 @@
           # Create a derivation that represents the $IDRIS2_PREFIX containing
           # the given package sources.
           mkIdris2Prefix = packageSources:
-            pkgs.runCommand "idris2-prefix"
+            pkgs.runCommandCC "idris2-prefix"
               {
-                buildInputs = [ pkgs.idris2 ];
+                buildInputs = [
+                  pkgs.idris2
+                ];
               } ''
               set -e
-              mkdir -p $out
+              mkdir -p $out/src
               ${lib.concatMapStringsSep "\n" 
                 (p: '' 
-                  pushd ${p} 
+                  # FIXME: use name instead of rev (which could be same)
+                  cp -r ${p} $out/src/${p.rev}
+                  pushd $out/src/${p.rev}
+                  chmod -R u+w .
                   IDRIS2_PREFIX=$out idris2 --build-dir $out/tmp --install *.ipkg
                   popd
                 '') 
                 packageSources
               }
-              rm -rf $out/tmp
+              rm -rf $out/tmp $out/src
             '';
           # TODO: Best to parse this out of bare-idris.ipkg?
           idrisPrefix = mkIdris2Prefix [
-            inputs.idris-indexed
+            inputs.collie
           ];
         in
         {
@@ -68,7 +73,6 @@
           packages.idrisprefix = idrisPrefix;
           devShells.default =
             let
-
               shell = pkgs.mkShell {
                 nativeBuildInputs = [
                   pkgs.idris2

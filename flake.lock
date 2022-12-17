@@ -1,5 +1,21 @@
 {
   "nodes": {
+    "collie": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1642687104,
+        "narHash": "sha256-0GziqzEUDs1tFd5yiu5NECV0nP1aMPe2QxS9oqhmW6I=",
+        "owner": "ohad",
+        "repo": "collie",
+        "rev": "46bff04a8d9a1598fec9b19f515541df16dc64ef",
+        "type": "github"
+      },
+      "original": {
+        "owner": "ohad",
+        "repo": "collie",
+        "type": "github"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -30,22 +46,6 @@
       "original": {
         "owner": "srid",
         "repo": "flake-root",
-        "type": "github"
-      }
-    },
-    "idris-indexed": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1659316146,
-        "narHash": "sha256-xySH74mX3i0Xi7EjXpfr/IUWl8kyB5svV34FVuK3uEk=",
-        "owner": "mattpolzin",
-        "repo": "idris-indexed",
-        "rev": "eb1a019dddcf90412fa8ada1e14574b37a3539c3",
-        "type": "github"
-      },
-      "original": {
-        "owner": "mattpolzin",
-        "repo": "idris-indexed",
         "type": "github"
       }
     },
@@ -120,8 +120,8 @@
     },
     "root": {
       "inputs": {
+        "collie": "collie",
         "flake-parts": "flake-parts",
-        "idris-indexed": "idris-indexed",
         "mission-control": "mission-control",
         "nixpkgs": "nixpkgs_2"
       }
